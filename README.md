@@ -38,7 +38,7 @@ Pull the source code from github, or upload it yourself:
 
 git clone https://github.com/2X2coin/2x2coin.git
 
-If your coin uses leveldb, compile leveldb:
+now you compile the leveldb:
 
 cd 2x2coin/src/leveldb
 
