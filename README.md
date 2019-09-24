@@ -4,6 +4,8 @@
 https://2x2coin.space     Official Website
 http://2x2block.space     ( Blockexplorer including API )
 
+Windows wallet https://github.com/2X2coin/2x2coin/blob/master/release/2X2-qt.exe
+
 
 How to compile the Linux Deamon , tested and working on ubtunu 14 - 16.04 and 17.  version .
 
