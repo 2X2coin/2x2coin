@@ -71,8 +71,11 @@ nano ~/.2X2/2X2.conf
 Add the following, save and exit:
 
 daemon=1
+
 server=1
+
 rpcuser=(username)
+
 rpcpassword=(strong password)
 
 Run 2X2d once more and if you did everything correctly, your daemon is now online! Type YOURCOINd help for a full list of commands available.
