@@ -54,7 +54,7 @@ Now run the daemon:
 
 It will return an error, telling you to set up config file in a directory. Now we’ll set up the config file. Note that this is case sensitive.
 
-nano ~/.2X2/2X".conf
+nano ~/.2X2/2X2.conf
 
 Add the following, save and exit:
 
