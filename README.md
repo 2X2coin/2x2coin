@@ -40,7 +40,7 @@ git clone https://github.com/2X2coin/2x2coin.git
 
 If your coin uses leveldb, compile leveldb:
 
-cd /2x2coin/src/leveldb
+cd 2x2coin/src/leveldb
 
 chmod +x build_detect_platform
 
@@ -50,7 +50,7 @@ make libleveldb.a libmemenv.a
 
 Return to source directory, and compile the daemon:
 
-cd /2x2coin/src
+cd 2x2coin/src
 
 make -f makefile.unix
 
