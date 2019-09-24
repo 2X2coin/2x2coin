@@ -9,12 +9,19 @@ How to compile the Linux Deamon , tested and working on ubtunu 14 - 16.04 and 17
 
 Set up a swapfile if your system has less than 1.5GB of memory:
 
+
 fallocate -l 2G /swapfile
+
 chown root:root /swapfile
+
 chmod 0600 /swapfile
+
 sudo bash -c "echo 'vm.swappiness = 10' >> /etc/sysctl.conf"
+
 mkswap /swapfile
+
 swapon /swapfile
+
 
 If fallocate doesn’t work, you can use dd if=/dev/zero of=/swapfile bs=1024 count=1024288 instead.
 
@@ -34,18 +41,23 @@ git clone https://github.com/2X2coin/2x2coin.git
 If your coin uses leveldb, compile leveldb:
 
 cd /2x2coin/src/leveldb
+
 chmod +x build_detect_platform
+
 make clean
+
 make libleveldb.a libmemenv.a
 
 Return to source directory, and compile the daemon:
 
 cd /2x2coin/src
+
 make -f makefile.unix
 
 Strip the file to make it smaller, then relocate it:
 
 strip 2X2d
+
 cp 2X2d /usr/bin
 
 Now run the daemon:
