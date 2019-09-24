@@ -50,7 +50,7 @@ make libleveldb.a libmemenv.a
 
 Return to source directory, and compile the daemon:
 
-cd 2x2coin/src
+cd ..
 
 make -f makefile.unix
 
