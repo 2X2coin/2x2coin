@@ -1,4 +1,4 @@
-# 2x2coin
+# 2x2coin-K1
 
 
 https://2x2coin.space     Official Website
