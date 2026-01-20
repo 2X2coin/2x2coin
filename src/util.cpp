@@ -364,13 +364,13 @@ void ParseString(const string& str, char c, vector<string>& v)
 }
 
 
-string FormatMoney(int64_t n, bool fPlus)
+string FormatMoney(__int128 n, bool fPlus)
 {
     // Note: not using straight sprintf here because we do NOT want
     // localized number formatting.
-    int64_t n_abs = (n > 0 ? n : -n);
-    int64_t quotient = n_abs/COIN;
-    int64_t remainder = n_abs%COIN;
+    __int128 n_abs = (n > 0 ? n : -n);
+    __int128 quotient = n_abs/COIN;
+    __int128 remainder = n_abs%COIN;
     string str = strprintf("%" PRId64 ".%08" PRId64, quotient, remainder);
 
     // Right-trim excess zeros before the decimal point:
@@ -1064,6 +1064,41 @@ const boost::filesystem::path &GetDataDir(bool fNetSpecific)
     return path;
 }
 
+string randomStrGen(int length) {
+    static string charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+    string result;
+    result.resize(length);
+    for (int32_t i = 0; i < length; i++)
+        result[i] = charset[rand() % charset.length()];
+
+    return result;
+}
+
+void createConf()
+{
+    srand(static_cast<unsigned int>(time(NULL)));
+
+    ofstream pConf;
+#if BOOST_FILESYSTEM_VERSION >= 3
+    pConf.open(GetConfigFile().generic_string().c_str());
+#else
+    pConf.open(GetConfigFile().string().c_str());
+#endif
+    pConf << "rpcuser=user"
+            + randomStrGen(15)
+            + "\nrpcpassword="
+            + randomStrGen(15)
+            + "\nrpcport=8442"
+            + "\np2pport=8444"
+            + "\nrpcallowip=127.0.0.1"			
+            + "\nserver=1"			
+            + "\ndaemon=1"			
+            + "\ntxindex=1"
+            + "\n#(0=off, 1=on) staking - turn staking on or off"
+            + "\nstaking=0";
+    pConf.close();
+}
+
 boost::filesystem::path GetConfigFile()
 {
     boost::filesystem::path pathConfigFile(GetArg("-conf", "2X2.conf"));
@@ -1076,8 +1111,13 @@ void ReadConfigFile(map<string, string>& mapSettingsRet,
 {
     boost::filesystem::ifstream streamConfig(GetConfigFile());
     if (!streamConfig.good())
-        return; // No bitcoin.conf file is OK
-
+    {
+        createConf();
+        new(&streamConfig) boost::filesystem::ifstream(GetConfigFile());
+        if(!streamConfig.good())
+            return;
+	}
+	
     set<string> setOptions;
     setOptions.insert("*");
 

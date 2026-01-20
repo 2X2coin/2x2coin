@@ -28,14 +28,14 @@ class CNode;
 
 static const int LAST_POW_BLOCK = 1000;
 
-static const unsigned int MAX_BLOCK_SIZE = 1000000;
+static const unsigned int MAX_BLOCK_SIZE = 16777216;
 static const unsigned int MAX_BLOCK_SIZE_GEN = MAX_BLOCK_SIZE/2;
 static const unsigned int MAX_BLOCK_SIGOPS = MAX_BLOCK_SIZE/50;
 static const unsigned int MAX_ORPHAN_TRANSACTIONS = MAX_BLOCK_SIZE/100;
 static const unsigned int MAX_INV_SZ = 50000;
 static const int64_t MIN_TX_FEE = 100000000;
 static const int64_t MIN_RELAY_TX_FEE = MIN_TX_FEE;
-static const int64_t MAX_MONEY = 90000000000 * COIN;
+static const int64_t MAX_MONEY = std::numeric_limits<int64_t>::max();
 static const int64_t COIN_YEAR_REWARD = 365 * CENT; // 365% per year
 static const int MODIFIER_INTERVAL_SWITCH = 1;
 
@@ -1112,7 +1112,7 @@ public:
     int nHeight;
 
     int64_t nMint;
-    int64_t nMoneySupply;
+    __int128 nMoneySupply;
 
     unsigned int nFlags;  // ppcoin: block index flags
     enum  
